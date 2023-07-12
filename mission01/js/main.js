@@ -22,7 +22,7 @@ function pwReg(text) {
   return re.test(String(text).toLowerCase());
 }
 
-//@ 입력 값이 필요한 input과 button에 변수를 할당
+//@ 입력 값이 필요한 input과 button를 const로 선언
 const emailInput = document.getElementById('userEmail');
 const pwInput = document.getElementById('userPassword');
 const loginBtn = document.querySelector('.btn-login');
