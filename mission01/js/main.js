@@ -22,17 +22,21 @@ function pwReg(text) {
   return re.test(String(text).toLowerCase());
 }
 
-const idInput = document.getElementById('userEmail');
+//@ 입력 값이 필요한 input과 button에 변수를 할당
+const emailInput = document.getElementById('userEmail');
 const pwInput = document.getElementById('userPassword');
 const loginBtn = document.querySelector('.btn-login');
 
+//@ 버튼 클릭시 loginCheck 함수 실행
 loginBtn.addEventListener('click', loginCheck);
 
-idInput.addEventListener('keyup', validateEmailInput);
+//@ input에 값을 입력하면 함수 실행됨
+emailInput.addEventListener('keyup', validateEmailInput);
 pwInput.addEventListener('keyup', validatePasswordInput);
 
+//@ input에 입력한 값을 validateEmail로 전달
 function validateEmailInput(event) {
-  const email = event.target.value;
+  const email = event.target.value; //입력 필드 값에 접근
   validateEmail(email);
 }
 
@@ -41,13 +45,14 @@ function validatePasswordInput(event) {
   validatePassword(password);
 }
 
+//@ 위에서 전달 받은 값을 정규표현식으로 유효성 검사
 function validateEmail(email) {
   const isEmailValid = emailReg(email);
   if (!isEmailValid) {
     console.log('이메일 형식이 올바르지 않습니다.');
-    idInput.classList.add('is--invalid');
+    emailInput.classList.add('is--invalid');
   } else {
-    idInput.classList.remove('is--invalid');
+    emailInput.classList.remove('is--invalid');
   }
   return isEmailValid;
 }
@@ -63,13 +68,11 @@ function validatePassword(password) {
   return isPasswordValid;
 }
 
+//@ input에 입력한 값과 user의 id/pw 일치확인
 function loginCheck(event) {
   event.preventDefault();
 
-  const userEmail = idInput.value;
-  const password = pwInput.value;
-
-  if (userEmail === user.id && password === user.pw) {
+  if (emailInput.value === user.id && pwInput.value === user.pw) {
     window.location.href = 'welcome.html';
   } else {
     console.log('로그인 실패 - 아이디와 비밀번호가 일치하지 않습니다.');
