@@ -22,28 +22,46 @@ function pwReg(text) {
   return re.test(String(text).toLowerCase());
 }
 
-let idInput = document.getElementById('userEmail');
-let pwInput = document.getElementById('userPassword');
-let loginBtn = document.querySelector('.btn-login');
+const idInput = document.getElementById('userEmail');
+const pwInput = document.getElementById('userPassword');
+const loginBtn = document.querySelector('.btn-login');
 
 loginBtn.addEventListener('click', loginCheck);
 
+function validateEmail(email) {
+  let isEmailValid = emailReg(email);
+  if (!isEmailValid) {
+    console.log('이메일 형식이 올바르지 않습니다.');
+    idInput.classList.add('is--invalid');
+  } else {
+    idInput.classList.remove('is--invalid');
+  }
+  return isEmailValid;
+}
+
+function validatePassword(password) {
+  let isPasswordValid = pwReg(password);
+  if (!isPasswordValid) {
+    console.log('비밀번호 형식이 올바르지 않습니다.');
+    pwInput.classList.add('is--invalid');
+  } else {
+    pwInput.classList.remove('is--invalid');
+  }
+  return isPasswordValid;
+}
+
 function loginCheck(event) {
-  let loginId = idInput.value;
-  let userId = user.id;
-  let password = pwInput.value;
-  let userPassword = user.pw;
+  event.preventDefault();
 
-  let isUserIdValid = loginId === userId;
-  let isPasswordValid = password === userPassword;
+  const userEmail = idInput.value;
+  const password = pwInput.value;
 
-  if (isUserIdValid && isPasswordValid) {
-    setTimeout(function () {
-      window.location.href = 'welcome.html';
-    }, 0);
+  const isUserEmailValid = validateEmail(userEmail);
+  const isPasswordValid = validatePassword(password);
+
+  if (isUserEmailValid && isPasswordValid && userEmail === user.id && password === user.pw) {
+    window.location.href = 'welcome.html';
   } else {
     console.log('로그인 실패 - 아이디와 비밀번호가 일치하지 않습니다.');
-    idInput.classList.add('is--invalid');
-    pwInput.classList.add('is--invalid');
   }
 }
