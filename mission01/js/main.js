@@ -28,8 +28,21 @@ const loginBtn = document.querySelector('.btn-login');
 
 loginBtn.addEventListener('click', loginCheck);
 
+idInput.addEventListener('keyup', validateEmailInput);
+pwInput.addEventListener('keyup', validatePasswordInput);
+
+function validateEmailInput(event) {
+  const email = event.target.value;
+  validateEmail(email);
+}
+
+function validatePasswordInput(event) {
+  const password = event.target.value;
+  validatePassword(password);
+}
+
 function validateEmail(email) {
-  let isEmailValid = emailReg(email);
+  const isEmailValid = emailReg(email);
   if (!isEmailValid) {
     console.log('이메일 형식이 올바르지 않습니다.');
     idInput.classList.add('is--invalid');
@@ -40,7 +53,7 @@ function validateEmail(email) {
 }
 
 function validatePassword(password) {
-  let isPasswordValid = pwReg(password);
+  const isPasswordValid = pwReg(password);
   if (!isPasswordValid) {
     console.log('비밀번호 형식이 올바르지 않습니다.');
     pwInput.classList.add('is--invalid');
@@ -56,10 +69,7 @@ function loginCheck(event) {
   const userEmail = idInput.value;
   const password = pwInput.value;
 
-  const isUserEmailValid = validateEmail(userEmail);
-  const isPasswordValid = validatePassword(password);
-
-  if (isUserEmailValid && isPasswordValid && userEmail === user.id && password === user.pw) {
+  if (userEmail === user.id && password === user.pw) {
     window.location.href = 'welcome.html';
   } else {
     console.log('로그인 실패 - 아이디와 비밀번호가 일치하지 않습니다.');
