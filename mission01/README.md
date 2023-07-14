@@ -17,7 +17,7 @@
 ### 정규표현식을 사용한 조건처리
 
 - getElementById 메서드로 id,pw의 input에 접근하는 const선언
-- input에 값이 입력되면 함수가 실행되는 keyup 이벤트를 설정했습니다.
+- input에 값이 입력되면 함수가 실행되는 input 이벤트를 설정했습니다.
 - `validateEmailInput` 함수를 통해서 입력된 input의 값을 `validateEmail` 함수로 전달합니다.
 
 ```js

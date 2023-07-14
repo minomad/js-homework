@@ -31,8 +31,8 @@ const loginBtn = document.querySelector('.btn-login');
 loginBtn.addEventListener('click', loginCheck);
 
 //@ input에 값을 입력하면 함수 실행됨
-emailInput.addEventListener('keyup', validateEmailInput);
-pwInput.addEventListener('keyup', validatePasswordInput);
+emailInput.addEventListener('input', validateEmailInput);
+pwInput.addEventListener('input', validatePasswordInput);
 
 //@ input에 입력한 값을 validateEmail로 전달
 function validateEmailInput(event) {
@@ -54,7 +54,7 @@ function validateEmail(email) {
   } else {
     emailInput.classList.remove('is--invalid');
   }
-  return isEmailValid;
+  return isEmailValid;// 
 }
 
 function validatePassword(password) {
