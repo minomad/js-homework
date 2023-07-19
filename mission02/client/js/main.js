@@ -14,8 +14,9 @@ const navigation = getNode('.nav');
 const list = getNodes('.nav li');
 const nickName = getNode('.nickName');
 const visualImg = getNode('.visual img');
+const body = getNode('body');
 
-//is-active 함수
+//@ handleSlider 함수
 const handleSlider = (e) => {
   e.preventDefault();
 
@@ -26,6 +27,7 @@ const handleSlider = (e) => {
   list.forEach((li) => {
     removeClass(li, 'is-active');
   });
+
   addClass(target, 'is-active');
 
   setBgColor(index);
@@ -33,29 +35,28 @@ const handleSlider = (e) => {
   setImage(index);
 };
 
-// setBgColor 함수
+//@ setBgColor 함수
 const setBgColor = (index) => {
-  const colorA = data[index - 1].color[0];
-  const colorB = data[index - 1].color[1];
-  document.body.style.background = `linear-gradient(to bottom, ${colorA}, ${colorB})`;
+  const colorA = data[index].color[0];
+  const colorB = data[index].color[1];
+  body.style.background = `linear-gradient(to bottom, ${colorA}, ${colorB})`;
 };
 
-// setNameText 함수
+//@ setNameText 함수
 const setNameText = (index) => {
-  const name = data[index - 1].name;
+  const name = data[index].name;
   nickName.textContent = name;
 };
 
-// setImage 함수
+//@ setImage 함수
 const setImage = (index) => {
-  const alt = data[index - 1].alt;
-  const imgName = data[index - 1].name;
+  const alt = data[index].alt;
+  const imgName = data[index].name;
   const src = imgName.toLowerCase();
 
   visualImg.src = `./assets/${src}.jpeg`;
   visualImg.alt = alt;
 };
 
-
-//이벤트
+//@ 이벤트
 navigation.addEventListener('click', handleSlider);
