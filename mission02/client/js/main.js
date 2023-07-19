@@ -6,19 +6,20 @@
 5. 함수 분리
 */
 
-//@ 선언
+//# 선언
 const navigation = getNode('.nav');
 const list = getNodes('.nav li');
 const nickName = getNode('.nickName');
 const visualImg = getNode('.visual img');
 const body = getNode('body');
 
-//@ handleSlider 함수
+//# handleSlider 함수
+// 이벤트 위임
 const handleSlider = (e) => {
   e.preventDefault();
 
   const target = e.target.closest('li');
-  const index = attr(target, 'data-index');
+  const index = attr(target, 'data-index'); //index값 추출
 
   if (!target) return;
 
@@ -27,34 +28,42 @@ const handleSlider = (e) => {
   });
 
   addClass(target, 'is-active');
+
+  //data-index의 값을 받아서 함수 호출
   setBgColor(index);
   setNameText(index);
   setImage(index);
-  
 };
 
-//@ setBgColor 함수
+// data[index - 1] 코드를 반복적으로 사용해서 반환되는 함수를 설정했음
+const dataIndex = (index) => {
+  return data[index - 1]; //
+};
+
+//# setBgColor 함수
+// 배경 컬러 설정
 const setBgColor = (index) => {
-  const colorA = data[index - 1].color[0];
-  const colorB = data[index - 1].color[1];
-  body.style.background = `linear-gradient(to bottom, ${colorA}, ${colorB})`;
+  const { color } = dataIndex(index); // dataIndex값을 객체 구조 분해 할당
+  const [colorA, colorB] = color; //구조분해된 객체를 배열로 구조 분해 할당
+  body.style.background = `linear-gradient(to bottom, ${colorA}, ${colorB})`; //백리터럴로 배열로 구조 분해된 변수를 할당함
 };
 
-//@ setNameText 함수
+//# setNameText 함수
+// 닉네임 설정
 const setNameText = (index) => {
-  const name = data[index - 1].name;
+  const { name } = dataIndex(index);
   nickName.textContent = name;
 };
 
-//@ setImage 함수
+//# setImage 함수
+// 이미지 설정
 const setImage = (index) => {
-  const alt = data[index - 1].alt;
-  const imgName = data[index - 1].name;
-  const src = imgName.toLowerCase();
+  const { alt, name } = dataIndex(index);
+  const src = name.toLowerCase(); // data의 name은 대문자이기에 그 값은 소문자로 변경해서 src경로에 할당
 
   visualImg.src = `./assets/${src}.jpeg`;
   visualImg.alt = alt;
 };
 
-//@ 이벤트
+//# 이벤트
 navigation.addEventListener('click', handleSlider);
