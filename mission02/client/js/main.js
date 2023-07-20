@@ -35,31 +35,30 @@ const handleSlider = (e) => {
   setImage(index);
 };
 
-// 반복적으로 사용되는 data[index - 1] 코드를 함수로 만들어 반환
+// 반복적으로 사용되는 data[index - 1] 코드를 함수로 만들어서 반환
 const dataIndex = (index) => {
-  return data[index - 1]; //data배열에서 target이 된 index값에 접근
+  return data[index - 1]; //data배열에서 target이 된 index값(요소)를 반환
 };
 
 //# setBgColor 함수
 // 배경 컬러 설정
-const setBgColor = (index) => {
-  // handleSlider 함수에서 target이 된 index값을 가지고 있음
-  const { color } = dataIndex(index); // dataIndex값으로 color 값을 할당
+const setBgColor = (index) => { // handleSlider 함수에서 target이 된 index값을 가지고 있음
+  const { color } = dataIndex(index); // dataIndex 요소에서 color 값을 할당
   const [colorA, colorB] = color; //data의 color는 배열이라서 배열로 다시 할당
-  body.style.background = `linear-gradient(to bottom, ${colorA}, ${colorB})`; //백리터럴로 배열로 구조 분해된 변수를 할당함
+  body.style.background = `linear-gradient(to bottom, ${colorA}, ${colorB})`; //배열로 구조 분해된 변수를 할당함
 };
 
 //# setNameText 함수
 // 닉네임 설정
 const setNameText = (index) => {
-  const { name } = dataIndex(index);
+  const { name } = dataIndex(index); // dataIndex 요소에서 name 값을 할당
   nickName.textContent = name;
 };
 
 //# setImage 함수
 // 이미지 설정
 const setImage = (index) => {
-  const { alt, name } = dataIndex(index);
+  const { alt, name } = dataIndex(index); // dataIndex 요소에서 alt, name 값을 할당
   const src = name.toLowerCase(); // data의 name은 대문자이기에 그 값은 소문자로 변경해서 src경로에 할당
 
   visualImg.src = `./assets/${src}.jpeg`;
