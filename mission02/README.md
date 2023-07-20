@@ -35,7 +35,7 @@ const handleSlider = (e) => {
 
 - 반복적으로 사용되는 `data[index - 1] `코드를 함수로 만들어 반환했습니다.
 
-- data.js에 있는 data배열에서 target이 된 index값에 해당하는 요소를 반환합니다.
+- data.js에서 target이 된 index값에 해당하는 요소를 반환합니다.
 
 ```js
 const dataIndex = (index) => {
@@ -58,6 +58,7 @@ const setBgColor = (index) => {
 ```
 
 ## 텍스트 변경
+dataIndex 요소에서 name 값을 할당해서 textContent로 출력했습니다.
 ```js
 const setNameText = (index) => {
   const { name } = dataIndex(index);
